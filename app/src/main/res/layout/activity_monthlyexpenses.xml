@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="151dp"
+        android:layout_height="53dp"
+        android:layout_alignBottom="@+id/expense_monthview"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="249dp"
+        android:layout_marginBottom="510dp"
+        android:text="Select Year"
+        android:gravity="center"/>
+
+    <NumberPicker
+        android:id="@+id/expense_yarpicker"
+        android:layout_width="118dp"
+        android:layout_height="71dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="170dp"
+        android:layout_marginEnd="123dp" />
+
+    <ListView
+        android:id="@+id/expense_monthview"
+        android:layout_width="match_parent"
+        android:layout_height="504dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="30dp"
+        tools:listitem="@layout/list_view">
+
+    </ListView>
+
+</RelativeLayout>

@@ -2,6 +2,7 @@ package com.example.expensestracker
 
 import android.app.DatePickerDialog
 import android.content.ContentValues
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-/*
+
 ///======================
 
         var dbData = DataBaseHelper(applicationContext)
@@ -42,11 +43,13 @@ class MainActivity : AppCompatActivity() {
 
         var cv = ContentValues()
         cv.put("item_name" , "akkk")
-        cv.put("amount" , "550")
+        cv.put("amount" , 550)
         cv.put("description" , "test chumma")
+        cv.put("date_added", "25-Aug-10")
+
         db.insert("monthlyExpenses",null,cv)
         result.requery()
-
+/*
         var ad = AlertDialog.Builder(this)
         ad.setTitle("Add record")
         ad.setMessage("Record inserted successfully.....!")
@@ -70,6 +73,13 @@ class MainActivity : AppCompatActivity() {
         val add_expenses: View = findViewById(R.id.add_expenses)
         val viewAllExpense :View = findViewById(R.id.btn_view_all_expense)
         val viewAllIncome :View = findViewById(R.id.btn_view_all_income)
+
+        //view all expenses shows monthly list
+        viewAllExpense.setOnClickListener {
+            val intent = Intent(this, monthlyexpensesActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
         // add button click event - fab
@@ -140,8 +150,8 @@ class MainActivity : AppCompatActivity() {
                 val itemAmount = expense_DialogView.findViewById(R.id.expense_value) as EditText
                 val itemDate = expense_DialogView.findViewById(R.id.txt_selected_Date) as TextView
                 val itemDiscription = expense_DialogView.findViewById(R.id.expense_discription) as EditText
-                val itemNewDate: LocalDate = LocalDate.parse(itemDate.toString(),  DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                insert_Expense_Data(itemName.text.toString() ,itemAmount.text.toString().toInt(),itemDiscription.text.toString(),itemNewDate)
+                //val itemNewDate: LocalDate = LocalDate.parse(itemDate.toString(),  DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                insert_Expense_Data(itemName.text.toString() ,itemAmount.text.toString().toInt(),itemDiscription.text.toString(),itemDate.text.toString())
                 mAlertDialog.dismiss()
             }
 
@@ -178,7 +188,7 @@ class MainActivity : AppCompatActivity() {
         dataBase.insert("monthlyIncome",null,cv)
     }
 
-    private fun insert_Expense_Data(itemName:String, amount:Int, discription:String, addedDate: LocalDate) {
+    private fun insert_Expense_Data(itemName:String, amount:Int, discription:String, addedDate: String) {
         var dbData = DataBaseHelper(applicationContext)
         var dataBase = dbData.readableDatabase
         var cv = ContentValues()
