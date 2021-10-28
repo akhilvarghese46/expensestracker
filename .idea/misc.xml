@@ -4,10 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/drawable/ic_plus_24.xml" value="0.26666666666666666" />
-        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_main.xml" value="0.3611111111111111" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_Income.xml" value="0.25052083333333336" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_expensesview.xml" value="0.25052083333333336" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_incomeview.xml" value="0.15729166666666666" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_listview.xml" value="0.4" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_main_old.xml" value="0.25416666666666665" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/add_expenses.xml" value="0.25416666666666665" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/add_income.xml" value="0.25416666666666665" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/list_view.xml" value="0.25052083333333336" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/row_expenses.xml" value="0.25052083333333336" />
       </map>
     </option>
   </component>
@@ -20,7 +26,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.264" />
+        <option name="scale" value="0.15729166666666666" />
       </ProjectState>
     </option>
   </component>
