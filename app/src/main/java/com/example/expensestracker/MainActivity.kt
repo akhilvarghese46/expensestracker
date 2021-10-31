@@ -13,11 +13,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.example.expensestracker.Adaptor.ExpensesAdaptor
+import com.example.expensestracker.Data.ExpensesData
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private var clicked = false
     lateinit var cal: Calendar
@@ -25,47 +27,59 @@ class MainActivity : AppCompatActivity() {
     lateinit var passedMonth: String
     private lateinit var monthlyexpensesList : ListView
     lateinit var db :String
+    var expensesDatalist = arrayListOf<ExpensesData>()
+    lateinit var expensesAdaptor: ExpensesAdaptor
+    lateinit var expensesListView: ListView
+
+
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        getExpensesValues()
+
+
+
+
+
 ///======================
 
-        var dbData = DataBaseHelper(applicationContext)
-        var db = dbData.readableDatabase
-        var result = db.rawQuery("select * from monthlyExpenses" , null)
+        /*     var dbData = DataBaseHelper(applicationContext)
+             var db = dbData.readableDatabase
+             var result = db.rawQuery("select * from monthlyExpenses" , null)
 
 
-        //monthlyexpensesList =
+             //monthlyexpensesList =
 
 
-        var cv = ContentValues()
-        cv.put("item_name" , "akkk")
-        cv.put("amount" , 550)
-        cv.put("description" , "test chumma")
-        cv.put("date_added", "25-Aug-10")
+             var cv = ContentValues()
+             cv.put("item_name" , "akkk")
+             cv.put("amount" , 550)
+             cv.put("description" , "test chumma")
+             cv.put("date_added", "25-Aug-10")
 
-        db.insert("monthlyExpenses",null,cv)
-        result.requery()
-/*
-        var ad = AlertDialog.Builder(this)
-        ad.setTitle("Add record")
-        ad.setMessage("Record inserted successfully.....!")
-        ad.setPositiveButton("ok",null)
-        ad.show()
+             db.insert("monthlyExpenses",null,cv)
+             result.requery()
 
-        monthlyexpensesList = findViewById<ListView>(R.id.monthlyexpensesList)
-        var adapter = SimpleCursorAdapter(applicationContext,android.R.layout.simple_expandable_list_item_2,result,
-            arrayOf("item_name" ,"amount"),
-            intArrayOf(android.R.id.text1 , android.R.id.text2))
-        monthlyexpensesList.adapter = adapter
+             var ad = AlertDialog.Builder(this)
+             ad.setTitle("Add record")
+             ad.setMessage("Record inserted successfully.....!")
+             ad.setPositiveButton("ok",null)
+             ad.show()
 
-        /////==========================
+             monthlyexpensesList = findViewById<ListView>(R.id.monthlyexpensesList)
+             var adapter = SimpleCursorAdapter(applicationContext,android.R.layout.simple_expandable_list_item_2,result,
+                 arrayOf("item_name" ,"amount"),
+                 intArrayOf(android.R.id.text1 , android.R.id.text2))
+             monthlyexpensesList.adapter = adapter
+
+             /////==========================
 
 
-*/
+     */
 
         //initialize floating action buttons
         val add_btn: View = findViewById(R.id.add_btn)
@@ -179,6 +193,31 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun getExpensesValues() {
+        var dbData = DataBaseHelper(applicationContext)
+        var db = dbData.readableDatabase
+        var expensesData = db.rawQuery("select * from monthlyExpenses" , null)
+
+        expensesData.moveToFirst()
+        for(i in 0 until expensesData.count) {
+            var obj: ExpensesData = ExpensesData(expensesData.getInt(0), expensesData.getString(1),expensesData.getInt(2), expensesData.getString(3),expensesData.getString(4))
+            /*obj.itemId = expensesData.getInt(0)
+            obj.itemName = expensesData.getString(1)
+            obj.itemAmount = expensesData.getInt(2)
+            obj.itemDiscription = expensesData.getString(3)
+            obj.itemAddedDate = expensesData.getString(4)*/
+            expensesData.moveToNext()
+            expensesDatalist.add(obj)
+        }
+
+        expensesListView = findViewById(R.id.monthlyexpensesList)
+       // expensesListView.isClickable = true
+        expensesAdaptor = ExpensesAdaptor(this, expensesDatalist)
+        expensesListView.adapter = expensesAdaptor
+       // expensesListView.onItemClickListener = this
+
+    }
+
     private fun insert_Income_Data(incomeAmount: Int, incomeDate: LocalDate) {
         var dbData = DataBaseHelper(applicationContext)
         var dataBase = dbData.readableDatabase
@@ -242,5 +281,9 @@ class MainActivity : AppCompatActivity() {
             add_income.visibility=View.INVISIBLE
         }
 
+    }
+
+    override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        TODO("Not yet implemented")
     }
 }

@@ -23,7 +23,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="170dp"
-        android:layout_marginEnd="123dp" />
+        android:layout_marginEnd="123dp"
+        android:background="#FFC2C2"
+        android:backgroundTint="#F4C6C6"
+        android:foregroundTint="#FD3232" />
+
 
     <ListView
         android:id="@+id/expense_monthview"
