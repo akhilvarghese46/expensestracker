@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(R.layout.activity_main)
 
         getExpensesValues()
+        getExpenseAndincomeTotal()
+
 
 
 
@@ -190,6 +192,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 date_Dialog.show()
             }
         }
+
+    }
+
+    private fun getExpenseAndincomeTotal() {
+        val totalExpenses = findViewById(R.id.totalexpenses) as TextView
+        val totalIncome = findViewById(R.id.totalIncome) as TextView
 
     }
 
