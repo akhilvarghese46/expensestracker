@@ -1,5 +1,6 @@
 package com.example.expensestracker.Adaptor
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import com.example.expensestracker.Data.MonthData
 import com.example.expensestracker.R
 import com.example.expensestracker.monthlyexpensesActivity
 
-class MonthlyAdaptor(private val context: monthlyexpensesActivity, private val arrayList: ArrayList<MonthData>):
+class MonthlyAdaptor(private val context: Activity, private val arrayList: ArrayList<MonthData>):
         ArrayAdapter<MonthData>(context, R.layout.activity_monthlyexpenses,arrayList) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val inflater : LayoutInflater = LayoutInflater.from(context)

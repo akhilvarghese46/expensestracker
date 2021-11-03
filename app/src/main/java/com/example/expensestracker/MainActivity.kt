@@ -96,6 +96,11 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             startActivity(intent)
         }
 
+        //view all Income shows monthly list
+        viewAllIncome.setOnClickListener {
+            val intent = Intent(this, MonthlyIncomeActivity::class.java)
+            startActivity(intent)
+        }
 
 
         // add button click event - fab
@@ -123,7 +128,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 val incomeAddedDate: LocalDate = LocalDate.parse(income_Date.toString(),  DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                 insert_Income_Data(income_value.text.toString().toInt(),incomeAddedDate)
                 mAlertDialog.dismiss()
-                mAlertDialog.dismiss()
+
             }
 
             // cancel button for income value adding dialog box

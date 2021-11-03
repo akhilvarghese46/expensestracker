@@ -12,7 +12,7 @@ import com.example.expensestracker.Adaptor.MonthlyAdaptor
 import com.example.expensestracker.Data.ExpensesData
 import com.example.expensestracker.Data.MonthData
 
-class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListener {
+class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListener {
 
     var _numberpicker: NumberPicker? = null
     var monthArryList = arrayListOf<MonthData>()
@@ -49,7 +49,7 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
         var dbData = DataBaseHelper(applicationContext)
         var db = dbData.readableDatabase
         var expensesDatalist = arrayListOf<ExpensesData>()
-        var expensesData = db.rawQuery("select * from monthlyExpenses" , null)
+        var expensesData = db.rawQuery("select * from monthlyIncome" , null)
 
         for (i in monthList.indices) {
             expensesData.moveToFirst()
@@ -76,20 +76,6 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
 
 
 
-       /* var obj1: MonthData =
-            MonthData()
-        obj1.month =monthList[0]
-        obj1.amount= 15
-
-        var obj2: MonthData =
-            MonthData()
-        obj2.month =monthList[1]
-        obj2.amount= 22
-        monthArryList.add(obj1)
-        monthArryList.add(obj2)
-
-*/
-
         mothlyAdapter = MonthlyAdaptor(this, monthArryList)
         monthListview.adapter = mothlyAdapter
         monthListview.onItemClickListener = this
@@ -107,7 +93,7 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
         val selectedMonth = p1?.findViewById(R.id.item_name) as TextView
         var monthname = selectedMonth.text.toString().substring(0,3)
 
-        val intent = Intent(this, ExpensesviewActivity::class.java)
+        val intent = Intent(this, IncomeviewActivity::class.java)
         intent.putExtra("selectedMonth", monthname);
         startActivity(intent)
     }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:background="#E8E7E8"
@@ -38,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="184dp"
+            android:layout_marginRight="185dp"
             android:text="600 euro"
             android:textColor="#F44336"
             android:textFontWeight="@integer/material_motion_duration_long_2"
@@ -52,27 +51,7 @@
             android:layout_marginLeft="15dp"
             android:text="26-10-1995" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:layout_toStartOf="@+id/floatingActionButton4"
-            android:backgroundTint="#EFCACA"
-            android:clickable="true"
-            android:rotationX="8"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="11dp"
-            android:clickable="true"
-            app:backgroundTint="#E38F8F"
-            app:rippleColor="#F31313"
-            app:srcCompat="@android:drawable/ic_delete" />
     </RelativeLayout>
 
     <TextView
