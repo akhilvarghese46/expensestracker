@@ -27,7 +27,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
-            android:text="EXPENSE DETAILS"
+            android:text="INCOME DETAILS"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp" />
@@ -95,7 +95,7 @@
 
         android:layout_width="126dp"
         android:layout_height="wrap_content"
-        android:text="Item Name"
+        android:text="Source"
         android:imeOptions="actionNext"
          />
 
@@ -103,7 +103,7 @@
         android:id="@+id/expense_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Item Name"
+        android:hint="Source"
 
          />
 </LinearLayout>
@@ -114,38 +114,17 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Expense Amount"
+        android:text="Income Amount"
 
         />
 
         <TextView
-            android:id="@+id/expense_value"
+            android:id="@+id/income_value"
             android:layout_width="254dp"
             android:layout_height="wrap_content"
             />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:orientation="horizontal">
-
-        <TextView
-
-            android:layout_width="126dp"
-            android:layout_height="wrap_content"
-            android:gravity="start|top"
-            android:text="Expense Discription" />
-
-        <TextView
-            android:id="@+id/expense_discription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Expense Discription"
-            />
-
-
-    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

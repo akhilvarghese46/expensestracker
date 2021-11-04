@@ -4,21 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#F86A6A">
 
 
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:background="#CAC7C7"
-        tools:ignore="MissingConstraints">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="263dp">
@@ -26,6 +28,7 @@
             <LinearLayout
                 android:layout_width="208dp"
                 android:layout_height="match_parent"
+                android:background="@drawable/layout_bg_red"
                 android:orientation="vertical">
 
                 <TextView
@@ -50,36 +53,109 @@
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_bg_green"
+                android:orientation="vertical">
+
+                <TextView
+
+                    android:layout_width="201dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="21dp"
+                    android:padding="10dp"
+                    android:text="Monthly Income :"
+                    android:textColor="#008200"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/totalIncome"
+                    android:layout_width="102dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="18dp"
+                    android:layout_marginRight="9dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="35666"
+                    android:textAlignment="center"
+                    android:textColor="#008200"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
+            android:layout_height="550dp"
+            android:background="@drawable/layout_bg_red">
 
-                android:layout_width="201dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="21dp"
-                android:padding="10dp"
-                android:text="Monthly Income :"
-                android:textColor="#008200"
-                android:textSize="12dp"
-                android:textStyle="bold" />
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
 
-            <TextView
-                android:id="@+id/totalIncome"
-                android:layout_width="102dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="18dp"
-                android:layout_marginRight="9dp"
-                android:layout_marginBottom="20dp"
-                android:text="35666"
-                android:textAlignment="center"
-                android:textColor="#008200"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+                <ListView
+                    android:id="@+id/monthlyexpensesList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/list_view">
 
+                </ListView>
+
+            </RelativeLayout>
         </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#F41C1C"
+        android:gravity="center"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
+
+
+        <LinearLayout
+            android:layout_width="313dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/btn_view_all_expense"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="View All Expenses"
+                app:backgroundTint="@color/buttonColor" />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/btn_view_all_income"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="View All Income"
+                app:backgroundTint="#4CAF50" />
+
         </LinearLayout>
     </RelativeLayout>
 
@@ -91,8 +167,9 @@
         android:layout_marginBottom="24dp"
         android:clickable="true"
         android:focusable="true"
-        android:tint="@android:color/white"
-        android:backgroundTint="@color/purple_200"
+        android:background="@drawable/fab"
+
+        android:backgroundTint="#E37624"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_item" />
@@ -124,64 +201,8 @@
         app:layout_constraintEnd_toEndOf="@+id/add_income"
         app:srcCompat="@drawable/ic_add_item" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="409dp"
-        android:layout_height="476dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
-
-        <ListView
-            android:id="@+id/monthlyexpensesList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/list_view">
-
-        </ListView>
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#D50B0B"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.846"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
 
 
-        <LinearLayout
-            android:layout_width="313dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-
-            <Button
-                android:id="@+id/btn_view_all_expense"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="View All Expenses"
-                app:backgroundTint="@color/buttonColor" />
-
-            <Button
-                android:id="@+id/btn_view_all_income"
-                android:layout_width="97dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="View All Income"
-                app:backgroundTint="#4CAF50" />
-
-        </LinearLayout>
-    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp">
+    android:layout_margin="16dp"
+    >
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_gravity="center"
-        android:background="#B6B4B4">
+        android:textSize="30dp"
+        android:background="@drawable/curved_view">
 
         <TextView
             android:layout_width="377dp"
@@ -20,10 +24,10 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="-4dp"
+            android:layout_marginBottom="5dp"
             android:text="ADD EXPENSE"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -39,12 +43,14 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:padding="10dp"
             android:id="@+id/btn_choose_Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
             android:text="Select Date"
-            android:layout_centerHorizontal="true" />
+            app:backgroundTint="#4CAF50"
+            android:background="@drawable/submit_button" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -75,59 +81,77 @@
 
     </RelativeLayout>
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Item Name"
-        android:inputType="text"
-        android:imeOptions="actionNext"
-        android:id="@+id/expense_item"/>
+        android:layout_height="229dp"
+        android:orientation="vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Expense Amount"
-        android:inputType="text"
-        android:imeOptions="actionNext"
-        android:id="@+id/expense_value"/>
-
-    <EditText
-        android:id="@+id/expense_discription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Expense Discription"
-        android:ems="15"
-        android:gravity="start|top"
-        android:inputType="textMultiLine" />
-
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_add_expense"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/expense_item"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_toStartOf="@+id/btn_cancel_expense"
-            android:background="#B6B4B4"
-            android:text="submit"
-            android:textColor="@color/white" />
+            android:hint="Item Name"
+            android:imeOptions="actionNext"
+            android:inputType="text" />
 
-        <Button
-            android:id="@+id/btn_cancel_expense"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/expense_value"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="51dp"
-            android:background="#B6B4B4"
-            android:text="cancel"
-            android:textColor="@color/white" />
-    </RelativeLayout>
+            android:hint="Expense Amount"
+            android:imeOptions="actionNext"
+            android:inputType="text" />
 
+        <EditText
+            android:id="@+id/expense_discription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="15"
+            android:gravity="start|top"
+            android:hint="Expense Discription"
+            android:inputType="textMultiLine" />
+
+        <Switch
+            android:id="@+id/regular_exp"
+            android:layout_width="176dp"
+            android:layout_height="30dp"
+            android:layout_weight="0"
+            android:text="Regular Expenses" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_add_expense"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/submit_button"
+                android:text="submit"
+                android:textColor="@color/white"
+                app:backgroundTint="#4CAF50" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/btn_cancel_expense"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="cancel"
+                android:background="@drawable/submit_button"
+                android:textColor="@color/white"
+                app:backgroundTint="#768877" />
+
+
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

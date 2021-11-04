@@ -40,8 +40,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(R.layout.activity_main)
 
         getExpensesValues()
-        getExpenseAndincomeTotal()
 
+        val currentMonth = currentMonth()
+        getExpenseAndincomeTotal(currentMonth)
 
 
 
@@ -122,11 +123,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             // add income value
             val submit_button: View = income_DialogView.findViewById(R.id.btn_add_income)
             submit_button.setOnClickListener{
+                val income_source = income_DialogView.findViewById(R.id.item_source) as EditText
                 val income_value = income_DialogView.findViewById(R.id.income_value) as EditText
                 val income_Date = income_DialogView.findViewById(R.id.txt_selected_Date) as TextView
 
                 val incomeAddedDate: LocalDate = LocalDate.parse(income_Date.toString(),  DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                insert_Income_Data(income_value.text.toString().toInt(),incomeAddedDate)
+                insert_Income_Data(income_source.text.toString(),income_value.text.toString().toInt(),income_Date.text.toString())
                 mAlertDialog.dismiss()
 
             }
@@ -159,7 +161,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
             // Custom dialog layout
             val expense_DialogView = LayoutInflater.from(this).inflate(R.layout.add_expenses, null )
-            val expense_Builder = AlertDialog.Builder(this)
+            val expense_Builder = AlertDialog.Builder(this,R.style.CustomAlertDialog)
                 .setView(expense_DialogView)
 
             val mAlertDialog = expense_Builder.show()
@@ -200,13 +202,23 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     }
 
-    private fun getExpenseAndincomeTotal() {
+    private fun getExpenseAndincomeTotal(currentMonth: String) {
         val totalExpenses = findViewById(R.id.totalexpenses) as TextView
         val totalIncome = findViewById(R.id.totalIncome) as TextView
+        var dbData = DataBaseHelper(applicationContext)
+        var db = dbData.readableDatabase
 
+        var expensesData = db.rawQuery("select sum(amount) from monthlyExpenses where date_added LIKE '%$currentMonth%'", null)
+
+        expensesData.moveToFirst()
+        var incomeData = db.rawQuery("select sum(income_amount) from monthlyIncome where date_added LIKE '%$currentMonth%'" , null)
+
+        incomeData.moveToFirst()
+        totalIncome.text = incomeData.getInt(0).toString()
+        totalExpenses.text = (incomeData.getInt(0) - expensesData.getInt(0)).toString()
     }
 
-    private fun getExpensesValues() {
+    public fun getExpensesValues() {
         var dbData = DataBaseHelper(applicationContext)
         var db = dbData.readableDatabase
         var expensesData = db.rawQuery("select * from monthlyExpenses" , null)
@@ -231,11 +243,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     }
 
-    private fun insert_Income_Data(incomeAmount: Int, incomeDate: LocalDate) {
+    private fun insert_Income_Data(incomeSource:String,incomeAmount: Int, incomeDate: String) {
         var dbData = DataBaseHelper(applicationContext)
         var dataBase = dbData.readableDatabase
         var cv = ContentValues()
         cv.put("income_amount" , incomeAmount)
+        cv.put("income_source" , incomeSource)
         cv.put("date_added" , incomeDate.toString())
         dataBase.insert("monthlyIncome",null,cv)
     }
@@ -264,7 +277,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         passedMonth = mMonth
 
     }
-
+    private fun currentMonth(): String {
+        cal = Calendar.getInstance()
+        val mMonth = cal.getDisplayName(Calendar.MONTH,Calendar.SHORT,Locale.US)
+        val curntMon = mMonth.toString()
+        return curntMon
+    }
 
     //Listener
     val fn_date_listener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.expensestracker.Adaptor.MonthlyAdaptor
 import com.example.expensestracker.Data.ExpensesData
+import com.example.expensestracker.Data.IncomeData
 import com.example.expensestracker.Data.MonthData
 
 class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -48,24 +49,24 @@ class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListene
 
         var dbData = DataBaseHelper(applicationContext)
         var db = dbData.readableDatabase
-        var expensesDatalist = arrayListOf<ExpensesData>()
-        var expensesData = db.rawQuery("select * from monthlyIncome" , null)
+       // var incomeDatalist = arrayListOf<IncomeData>()
+        var incomeData = db.rawQuery("select * from monthlyIncome" , null)
 
         for (i in monthList.indices) {
-            expensesData.moveToFirst()
+            incomeData.moveToFirst()
             var obj: MonthData = MonthData()
             obj.month = monthList[i]
             var totalamount:Int=0
             val mon = monthList[i].substring(0,3).toString()
-            val mm = expensesData.getString(4)
-            var bolval = expensesData.getString(4).contains(monthList[i].substring(0,3))
-                for(i in 0 until expensesData.count) {
+            val mm = incomeData.getString(4)
+            var bolval = incomeData.getString(4).contains(monthList[i].substring(0,3))
+                for(i in 0 until incomeData.count) {
                     if (bolval == true) {
 
-                        totalamount = totalamount + expensesData.getInt(2)
+                        totalamount = totalamount + incomeData.getInt(2)
 
                     }
-                    expensesData.moveToNext()
+                    incomeData.moveToNext()
                 }
 
 

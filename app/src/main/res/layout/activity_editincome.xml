@@ -13,18 +13,18 @@
         android:background="#B6B4B4">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_width="377dp"
+            android:layout_height="53dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="1dp"
-            android:text="ADD INCOME"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:text="EDIT INCOME"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp" />
@@ -51,7 +51,11 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/btn_choose_Date"
             android:layout_height="wrap_content">
-
+            <TextView
+                android:id="@+id/item_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
             <TextView
                 android:id="@+id/sel"
                 android:layout_width="wrap_content"
@@ -74,21 +78,22 @@
         </RelativeLayout>
 
     </RelativeLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Source of income"
-        android:inputType="text"
-        android:imeOptions="actionNext"
-        android:id="@+id/item_source"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="enter your income"
+        android:hint="Source name"
         android:inputType="text"
         android:imeOptions="actionNext"
-        android:id="@+id/income_value"/>
+        android:id="@+id/expense_item"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Income Amount"
+        android:inputType="text"
+        android:imeOptions="actionNext"
+        android:id="@+id/expense_value"/>
 
 
     <RelativeLayout
@@ -98,17 +103,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_add_income"
+            android:id="@+id/btn_add_Income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
-            android:layout_toStartOf="@+id/btn_cancel_income"
+            android:layout_toStartOf="@+id/btn_cancel_Income"
             android:background="#B6B4B4"
             android:text="submit"
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/btn_cancel_income"
+            android:id="@+id/btn_cancel_Income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -117,4 +122,6 @@
             android:text="cancel"
             android:textColor="@color/white" />
     </RelativeLayout>
+
+
 </LinearLayout>
