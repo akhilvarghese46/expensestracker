@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="#E8E7E8"
-    android:backgroundTintMode="add"
-    android:foregroundTint="#F30303"
-    android:foregroundTintMode="add"
-    android:padding="10dp">
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/round_corners">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -22,45 +19,68 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/item_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:text="Tesco"
+                        android:textColor="@android:color/black"
+                        android:textSize="20dp" />
+                    <TextView
+                        android:id="@+id/added_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/item_name"
+                        android:layout_marginLeft="15dp"
+                        android:text="26-10-1995" />
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
+            <TextView
+                android:id="@+id/item_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:text="600 euro"
+                android:textColor="#F44336"
+                android:textFontWeight="@integer/material_motion_duration_long_2"
+                android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/item_name"
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="Tesco"
-            android:textColor="@android:color/black"
-            android:textSize="20dp" />
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="4dp">
+            <View
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0" />
 
-        <TextView
-            android:id="@+id/item_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="185dp"
-            android:text="600 euro"
-            android:textColor="#F44336"
-            android:textFontWeight="@integer/material_motion_duration_long_2"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/added_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_name"
-            android:layout_marginLeft="15dp"
-            android:text="26-10-1995" />
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="44dp"
+                android:layout_weight="0"
+                android:text="Regular expenses"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:checked="true"
+                android:clickable="false"/>
+        </LinearLayout>
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="84dp"
-        android:layout_marginBottom="6dp"
-        android:background="@android:color/black"
-        android:text="ajhjas" />
 </RelativeLayout>

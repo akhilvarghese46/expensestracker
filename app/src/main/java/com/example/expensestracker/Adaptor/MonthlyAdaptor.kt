@@ -22,7 +22,7 @@ class MonthlyAdaptor(private val context: Activity, private val arrayList: Array
 
         itemname.text = arrayList[position].month
         itemamount.text = arrayList[position].amount.toString()
-
+        addeddate.text = ""
 
         return view
     }

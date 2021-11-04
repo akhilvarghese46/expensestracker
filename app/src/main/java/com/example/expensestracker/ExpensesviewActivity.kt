@@ -109,13 +109,28 @@ class ExpensesviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener 
 
     private fun getMonthExpensesList() {
         var selectedMonth = intent.getStringExtra("selectedMonth")
+        var selecedYear = intent.getStringExtra("selecedYear")
+
         var dbData = DataBaseHelper(applicationContext)
         var db = dbData.readableDatabase
         var expensesDatalist = arrayListOf<ExpensesData>()
-        var expensesData = db.rawQuery("select * from monthlyExpenses" , null)
+        var str = "select * from monthlyExpenses where date_added like '%$selecedYear%' and date_added like '%$selectedMonth%'"
+
+        var expensesData = db.rawQuery(str, null)
         expensesData.moveToFirst()
+        if(expensesData.count == 0)
+        {
+            var obj: ExpensesData = ExpensesData(
+              0,
+                "No Data Found",
+                0,
+                "",
+                ""
+            )
+            expensesDatalist.add(obj)
+        }
         for(i in 0 until expensesData.count) {
-            if (expensesData.getString(4).contains(selectedMonth.toString())) {
+           // if (expensesData.getString(4).contains(selectedMonth.toString())) {
                 var obj: ExpensesData = ExpensesData(
                     expensesData.getInt(0),
                     expensesData.getString(1),
@@ -124,7 +139,7 @@ class ExpensesviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener 
                     expensesData.getString(4)
                 )
                 expensesDatalist.add(obj)
-            }
+            //}
             expensesData.moveToNext()
         }
 

@@ -4,42 +4,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_bg_red"
+    android:backgroundTint="#F47373">
 
-    <TextView
-        android:layout_width="151dp"
-        android:layout_height="53dp"
-        android:layout_alignBottom="@+id/expense_monthview"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="249dp"
-        android:layout_marginBottom="510dp"
-        android:text="Select Year"
-        android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <NumberPicker
-        android:id="@+id/expense_yarpicker"
-        android:layout_width="118dp"
-        android:layout_height="71dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="170dp"
-        android:layout_marginEnd="123dp"
-        android:background="#FFC2C2"
-        android:backgroundTint="#F4C6C6"
-        android:foregroundTint="#FD3232" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="73dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="151dp"
+                android:layout_height="53dp"
+                android:layout_alignBottom="@+id/expense_monthview"
+                android:background="#F47373"
+                android:gravity="center"
+                android:text="Select Year"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <NumberPicker
+                android:id="@+id/expense_yarpicker"
+                android:layout_width="118dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/drawablenp"
+                android:foregroundTint="#FD3232" />
+        </LinearLayout>
 
 
-    <ListView
-        android:id="@+id/expense_monthview"
-        android:layout_width="match_parent"
-        android:layout_height="504dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="69dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="30dp"
-        tools:listitem="@layout/list_view">
+        <ListView
+            android:id="@+id/expense_monthview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
 
-    </ListView>
+            tools:listitem="@layout/list_view">
+
+        </ListView>
+    </LinearLayout>
+
 
 </RelativeLayout>

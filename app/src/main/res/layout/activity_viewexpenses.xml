@@ -13,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_gravity="center"
-        android:background="#B6B4B4">
-
+        android:background="@drawable/curved_view">
         <TextView
             android:layout_width="377dp"
             android:layout_height="53dp"
@@ -23,10 +22,10 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="-4dp"
+            android:layout_marginBottom="5dp"
             android:text="EXPENSE DETAILS"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -92,7 +91,6 @@
     android:layout_height="wrap_content">
 
     <TextView
-
         android:layout_width="126dp"
         android:layout_height="wrap_content"
         android:text="Item Name"
@@ -108,21 +106,21 @@
          />
 </LinearLayout>
     <LinearLayout
-        android:layout_width="126dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="126dp"
         android:layout_height="wrap_content"
         android:text="Expense Amount"
-
         />
 
         <TextView
             android:id="@+id/expense_value"
-            android:layout_width="254dp"
+            android:layout_width="253dp"
             android:layout_height="wrap_content"
-            />
+            android:hint="Item Amount"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -146,6 +144,27 @@
 
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:layout_width="126dp"
+            android:layout_height="wrap_content"
+            android:gravity="start|top"
+            android:text="Regular Expense" />
+
+        <TextView
+            android:id="@+id/expense_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Regular Expense"
+            />
+
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -165,9 +184,10 @@
             android:layout_marginStart="135dp"
             android:layout_marginEnd="151dp"
             android:layout_marginBottom="23dp"
-            android:background="#B6B4B4"
             android:text="cancel"
-            android:textColor="@color/white" />
+            android:background="@drawable/submit_button"
+            android:textColor="@color/white"
+            app:backgroundTint="#768877" />
     </RelativeLayout>
 
 
