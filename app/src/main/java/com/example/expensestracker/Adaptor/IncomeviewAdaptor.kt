@@ -20,12 +20,10 @@ class IncomeviewAdaptor(private val context: Activity, private val arrayList : A
         val view : View = inflater.inflate(R.layout.activity_listview,null)
 
         val itemid : TextView = view.findViewById(R.id.item_id)
-        val itemname : TextView = view.findViewById(R.id.item_name)
         val itemamount : TextView = view.findViewById(R.id.item_amount)
         val addeddate : TextView = view.findViewById(R.id.added_date)
 
         itemid.text = arrayList[position].itemId.toString()
-        itemname.text = arrayList[position].itemName.toString()
         itemamount.text = arrayList[position].itemAmount.toString()
         addeddate.text = arrayList[position].itemAddedDate
 

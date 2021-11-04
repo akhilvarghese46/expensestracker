@@ -123,9 +123,8 @@ class IncomeviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener {
             if (incomeData.getString(4).contains(selectedMonth.toString())) {
                 var obj: IncomeData = IncomeData(
                     incomeData.getInt(0),
-                    incomeData.getString(1),
-                    incomeData.getInt(2),
-                    incomeData.getString(3)
+                    incomeData.getInt(1),
+                    incomeData.getString(2)
                 )
                 incomeDatalist.add(obj)
             }

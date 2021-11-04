@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:hint="Expense Amount"
             android:imeOptions="actionNext"
-            android:inputType="text" />
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/expense_discription"

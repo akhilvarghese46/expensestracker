@@ -115,22 +115,22 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
             // Custom dialog layout
             val income_DialogView = LayoutInflater.from(this).inflate(R.layout.add_income, null )
-            val income_Builder = AlertDialog.Builder(this)
+            val income_Builder = AlertDialog.Builder(this,R.style.CustomAlertDialog)
                 .setView(income_DialogView)
 
             val mAlertDialog = income_Builder.show()
 
             // add income value
-            val submit_button: View = income_DialogView.findViewById(R.id.btn_add_income)
+            val submit_button: View = income_DialogView.findViewById(R.id.btn_add_incomedata) as Button
             submit_button.setOnClickListener{
-                val income_source = income_DialogView.findViewById(R.id.item_source) as EditText
                 val income_value = income_DialogView.findViewById(R.id.income_value) as EditText
                 val income_Date = income_DialogView.findViewById(R.id.txt_selected_Date) as TextView
 
-                val incomeAddedDate: LocalDate = LocalDate.parse(income_Date.toString(),  DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                insert_Income_Data(income_source.text.toString(),income_value.text.toString().toInt(),income_Date.text.toString())
+                //val incomeAddedDate: LocalDate = LocalDate.parse(income_Date.toString(),  DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                insert_Income_Data(income_value.text.toString().toInt(),income_Date.text.toString())
                 mAlertDialog.dismiss()
-
+                val currentMonth = currentMonth()
+                getExpenseAndincomeTotal(currentMonth)
             }
 
             // cancel button for income value adding dialog box
@@ -175,6 +175,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 val itemDiscription = expense_DialogView.findViewById(R.id.expense_discription) as EditText
                 //val itemNewDate: LocalDate = LocalDate.parse(itemDate.toString(),  DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                 insert_Expense_Data(itemName.text.toString() ,itemAmount.text.toString().toInt(),itemDiscription.text.toString(),itemDate.text.toString())
+
+                val currentMonth = currentMonth()
+                getExpenseAndincomeTotal(currentMonth)
+
                 mAlertDialog.dismiss()
             }
 
@@ -217,7 +221,13 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         totalIncome.text = incomeData.getInt(0).toString()
         totalExpenses.text = (incomeData.getInt(0) - expensesData.getInt(0)).toString()
     }
-
+    public fun addValuestoList() {
+        var newexpensesList = arrayListOf<ExpensesData>()
+        lateinit var newexpenslistview: ListView
+        newexpenslistview = findViewById(R.id.monthlyexpensesList)
+        expensesAdaptor = ExpensesAdaptor(this, newexpensesList)
+        newexpenslistview.adapter = expensesAdaptor
+    }
     public fun getExpensesValues() {
         var dbData = DataBaseHelper(applicationContext)
         var db = dbData.readableDatabase
@@ -243,12 +253,11 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     }
 
-    private fun insert_Income_Data(incomeSource:String,incomeAmount: Int, incomeDate: String) {
+    private fun insert_Income_Data(incomeAmount: Int, incomeDate: String) {
         var dbData = DataBaseHelper(applicationContext)
         var dataBase = dbData.readableDatabase
         var cv = ContentValues()
         cv.put("income_amount" , incomeAmount)
-        cv.put("income_source" , incomeSource)
         cv.put("date_added" , incomeDate.toString())
         dataBase.insert("monthlyIncome",null,cv)
     }
@@ -261,7 +270,15 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         cv.put("amount" , amount)
         cv.put("description" , discription)
         cv.put("date_added" , addedDate.toString())
-        dataBase.insert("monthlyExpenses",null,cv)
+        var insertedId = dataBase.insert("monthlyExpenses",null,cv)
+
+        var obj: ExpensesData = ExpensesData(insertedId.toInt(), itemName,amount, discription,addedDate)
+        var newexpensesList = arrayListOf<ExpensesData>()
+        expensesDatalist.add(obj)
+        lateinit var newexpenslistview: ListView
+        newexpenslistview = findViewById(R.id.monthlyexpensesList)
+        expensesAdaptor = ExpensesAdaptor(this, expensesDatalist)
+        newexpenslistview.adapter = expensesAdaptor
     }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_gravity="center"
-        android:background="#B6B4B4">
+        android:background="@drawable/curved_view">>
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,12 +40,14 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:padding="10dp"
             android:id="@+id/btn_choose_Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
             android:text="Select Date"
-            android:layout_centerHorizontal="true" />
+            app:backgroundTint="#4CAF50"
+            android:background="@drawable/submit_button" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -62,59 +65,60 @@
 
             <TextView
                 android:id="@+id/txt_selected_Date"
-                android:layout_toRightOf="@+id/sel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="@color/purple_500"
                 android:layout_centerHorizontal="true"
+                android:layout_toRightOf="@+id/sel"
                 android:text="hello world "
-                />
+                android:textColor="@color/purple_500"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </RelativeLayout>
 
     </RelativeLayout>
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Source of income"
-        android:inputType="text"
-        android:imeOptions="actionNext"
-        android:id="@+id/item_source"/>
-
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="enter your income"
-        android:inputType="text"
+        android:inputType="number"
         android:imeOptions="actionNext"
         android:id="@+id/income_value"/>
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:layout_gravity="center"
+        android:layout_height="50dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_add_income"
+            android:id="@+id/btn_add_incomedata"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_toStartOf="@+id/btn_cancel_income"
-            android:background="#B6B4B4"
+            android:background="@drawable/submit_button"
             android:text="submit"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            app:backgroundTint="#4CAF50" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
 
         <Button
             android:id="@+id/btn_cancel_income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="51dp"
-            android:background="#B6B4B4"
+            android:background="@drawable/submit_button"
             android:text="cancel"
-            android:textColor="@color/white" />
-    </RelativeLayout>
+            android:textColor="@color/white"
+            app:backgroundTint="#768877" />
+    </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
