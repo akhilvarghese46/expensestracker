@@ -47,10 +47,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:background="@drawable/submit_button"
             android:padding="10dp"
             android:text="Select Date"
-            app:backgroundTint="#4CAF50"
-            android:background="@drawable/submit_button" />
+            app:backgroundTint="#4CAF50" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

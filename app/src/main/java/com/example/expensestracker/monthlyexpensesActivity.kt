@@ -15,6 +15,7 @@ import com.example.expensestracker.Data.MonthData
 class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListener {
 
     var _numberpicker: NumberPicker? = null
+    var _regularpicker: NumberPicker? = null
     var monthArryList = arrayListOf<MonthData>()
     lateinit var mothlyAdapter: MonthlyAdaptor
     lateinit var monthListview: ListView
@@ -52,7 +53,14 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
         })
     }
 
-    private fun get_MonthList(currentYear: Int) {
+    override fun onRestart() {
+        super.onRestart()
+        monthArryList.clear()
+        var currentYear  = findViewById<NumberPicker>(R.id.expense_yarpicker).value.toString()
+        get_MonthList(currentYear.toInt())
+    }
+
+    fun get_MonthList(currentYear: Int) {
         monthListview = findViewById(R.id.expense_monthview)
 
 
@@ -60,6 +68,14 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
         _numberpicker?.setMinValue(2015)
         _numberpicker?.setMaxValue(2030)
         _numberpicker?.setValue(currentYear)
+
+        _regularpicker = findViewById<NumberPicker>(R.id.regularpicker)
+        val regdatastring = arrayOf("All Expenses", "Regular Expenses", "Irregular Expenses")
+        _regularpicker?.setMinValue(0)
+        _regularpicker?.setMaxValue(regdatastring.size - 1)
+        _regularpicker?.setDisplayedValues(regdatastring)
+
+
 
         var str = "select * from monthlyExpenses where date_added like '%$currentYear%'"
         var dbData = DataBaseHelper(applicationContext)

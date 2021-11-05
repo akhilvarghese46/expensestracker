@@ -6,4 +6,5 @@ data class ExpensesData(
     var itemAmount: Int ,
     var itemDiscription: String ,
     var itemAddedDate: String ,
+    var isRegular : Int
 )

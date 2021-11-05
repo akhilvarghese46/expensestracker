@@ -77,7 +77,7 @@
 
 
                     <TextView
-                        android:id="@+id/totalexpenses"
+                        android:id="@+id/totalregularexp"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:layout_alignParentBottom="true"
@@ -107,7 +107,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/totalIncome"
+                        android:id="@+id/totalIrregularexp"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:layout_marginEnd="18dp"

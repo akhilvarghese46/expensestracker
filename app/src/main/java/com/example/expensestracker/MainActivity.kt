@@ -15,8 +15,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.expensestracker.Adaptor.ExpensesAdaptor
 import com.example.expensestracker.Data.ExpensesData
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -173,8 +171,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 val itemAmount = expense_DialogView.findViewById(R.id.expense_value) as EditText
                 val itemDate = expense_DialogView.findViewById(R.id.txt_selected_Date) as TextView
                 val itemDiscription = expense_DialogView.findViewById(R.id.expense_discription) as EditText
+                val regularValue = expense_DialogView.findViewById(R.id.regular_exp) as Switch
                 //val itemNewDate: LocalDate = LocalDate.parse(itemDate.toString(),  DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                insert_Expense_Data(itemName.text.toString() ,itemAmount.text.toString().toInt(),itemDiscription.text.toString(),itemDate.text.toString())
+                insert_Expense_Data(itemName.text.toString() ,itemAmount.text.toString().toInt(),itemDiscription.text.toString(),itemDate.text.toString(),regularValue.isChecked)
 
                 val currentMonth = currentMonth()
                 getExpenseAndincomeTotal(currentMonth)
@@ -205,7 +204,14 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
 
     }
+    override fun onRestart() {
+        super.onRestart()
+        expensesDatalist.clear()
+        getExpensesValues()
 
+        val currentMonth = currentMonth()
+        getExpenseAndincomeTotal(currentMonth)
+    }
     private fun getExpenseAndincomeTotal(currentMonth: String) {
         val totalExpenses = findViewById(R.id.totalexpenses) as TextView
         val totalIncome = findViewById(R.id.totalIncome) as TextView
@@ -235,7 +241,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
         expensesData.moveToFirst()
         for(i in 0 until expensesData.count) {
-            var obj: ExpensesData = ExpensesData(expensesData.getInt(0), expensesData.getString(1),expensesData.getInt(2), expensesData.getString(3),expensesData.getString(4))
+            var obj: ExpensesData = ExpensesData(expensesData.getInt(0), expensesData.getString(1),expensesData.getInt(2), expensesData.getString(3),expensesData.getString(4),expensesData.getInt(5))
             /*obj.itemId = expensesData.getInt(0)
             obj.itemName = expensesData.getString(1)
             obj.itemAmount = expensesData.getInt(2)
@@ -262,17 +268,29 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         dataBase.insert("monthlyIncome",null,cv)
     }
 
-    private fun insert_Expense_Data(itemName:String, amount:Int, discription:String, addedDate: String) {
+    private fun insert_Expense_Data(
+        itemName: String,
+        amount: Int,
+        discription: String,
+        addedDate: String,
+        checked: Boolean
+    ) {
         var dbData = DataBaseHelper(applicationContext)
         var dataBase = dbData.readableDatabase
         var cv = ContentValues()
+        var regular = 0
+        if(checked == true)
+        {
+            regular = 1
+        }
         cv.put("item_name" , itemName)
         cv.put("amount" , amount)
         cv.put("description" , discription)
         cv.put("date_added" , addedDate.toString())
+        cv.put("isRegular" , regular)
         var insertedId = dataBase.insert("monthlyExpenses",null,cv)
 
-        var obj: ExpensesData = ExpensesData(insertedId.toInt(), itemName,amount, discription,addedDate)
+        var obj: ExpensesData = ExpensesData(insertedId.toInt(), itemName,amount, discription,addedDate,regular)
         var newexpensesList = arrayListOf<ExpensesData>()
         expensesDatalist.add(obj)
         lateinit var newexpenslistview: ListView

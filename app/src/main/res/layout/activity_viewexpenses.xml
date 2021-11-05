@@ -34,50 +34,67 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:padding="20dp"
+        android:padding="10dp"
         android:id="@+id/firstLay"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
-        <RelativeLayout
-            android:layout_width="341dp"
-            android:layout_height="68dp"
-            android:layout_centerHorizontal="true">
-
-            <TextView
-                android:id="@+id/sel"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Selected Date: "
-                android:textColor="@android:color/black"
-                android:textSize="20dp" />
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/sel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selected Date: "
+                    android:textColor="@android:color/black"
+                    android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/txt_selected_Date"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/txt_selected_Date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_toRightOf="@+id/sel"
+                    android:text="hello world "
+                    android:textColor="@color/purple_500"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_toRightOf="@+id/sel"
-                android:text="hello world "
-                android:textColor="@color/purple_500"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:gravity="center">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginEnd="2dp"
-                android:backgroundTint="#EFCACA"
-                android:clickable="true"
-                android:rotationX="8"
-                app:srcCompat="@android:drawable/ic_menu_edit" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_delete"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="2dp"
+                    android:backgroundTint="#EFCACA"
+                    android:clickable="true"
+                    app:srcCompat="@android:drawable/ic_delete" />
 
-        </RelativeLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/floatingActionButton3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="#2EB807"
+                    android:clickable="true"
+                    android:rotationX="8"
+                    app:srcCompat="@android:drawable/ic_menu_edit" />
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/item_id"
@@ -166,29 +183,25 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="63dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="263dp">
 
 
         <Button
             android:id="@+id/btn_cancel_expense"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginStart="135dp"
-            android:layout_marginEnd="151dp"
-            android:layout_marginBottom="23dp"
-            android:text="cancel"
             android:background="@drawable/submit_button"
+            android:text="cancel"
             android:textColor="@color/white"
             app:backgroundTint="#768877" />
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>
