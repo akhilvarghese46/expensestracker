@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="104dp"
+            android:layout_height="80dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -38,7 +38,7 @@
                 <NumberPicker
                     android:id="@+id/expense_yarpicker"
                     android:layout_width="118dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/drawablenp"
                     android:foregroundTint="#FD3232" />
             </LinearLayout>

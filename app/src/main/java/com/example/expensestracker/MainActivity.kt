@@ -3,6 +3,8 @@ package com.example.expensestracker
 import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
 import com.example.expensestracker.Adaptor.ExpensesAdaptor
 import com.example.expensestracker.Data.ExpensesData
 
@@ -37,6 +40,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val actionBar: ActionBar?
+        actionBar = supportActionBar
+        val colorDrawable = ColorDrawable(Color.parseColor("#FD0000"))
+        actionBar?.setBackgroundDrawable(colorDrawable)
+
+
         getExpensesValues()
 
         val currentMonth = currentMonth()
@@ -44,43 +53,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
 
 
-
-
-///======================
-
-        /*     var dbData = DataBaseHelper(applicationContext)
-             var db = dbData.readableDatabase
-             var result = db.rawQuery("select * from monthlyExpenses" , null)
-
-
-             //monthlyexpensesList =
-
-
-             var cv = ContentValues()
-             cv.put("item_name" , "akkk")
-             cv.put("amount" , 550)
-             cv.put("description" , "test chumma")
-             cv.put("date_added", "25-Aug-10")
-
-             db.insert("monthlyExpenses",null,cv)
-             result.requery()
-
-             var ad = AlertDialog.Builder(this)
-             ad.setTitle("Add record")
-             ad.setMessage("Record inserted successfully.....!")
-             ad.setPositiveButton("ok",null)
-             ad.show()
-
-             monthlyexpensesList = findViewById<ListView>(R.id.monthlyexpensesList)
-             var adapter = SimpleCursorAdapter(applicationContext,android.R.layout.simple_expandable_list_item_2,result,
-                 arrayOf("item_name" ,"amount"),
-                 intArrayOf(android.R.id.text1 , android.R.id.text2))
-             monthlyexpensesList.adapter = adapter
-
-             /////==========================
-
-
-     */
 
         //initialize floating action buttons
         val add_btn: View = findViewById(R.id.add_btn)
@@ -125,7 +97,31 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 val income_Date = income_DialogView.findViewById(R.id.txt_selected_Date) as TextView
 
                 //val incomeAddedDate: LocalDate = LocalDate.parse(income_Date.toString(),  DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                insert_Income_Data(income_value.text.toString().toInt(),income_Date.text.toString())
+                var (incomechk,incomeId) = check_Income_Present(income_Date.text.toString())
+                if(incomechk == true) {
+                    insert_Income_Data(income_value.text.toString().toInt(),income_Date.text.toString())
+                }
+                else{
+                    val builder = AlertDialog.Builder(this@MainActivity)
+                    builder.setMessage("Already income added for this month. do you want to update?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes") { dialog, id ->
+                            delete_IncomeData(incomeId)
+                            insert_Income_Data(income_value.text.toString().toInt(),income_Date.text.toString())
+                            val currentMonth = currentMonth()
+                            getExpenseAndincomeTotal(currentMonth)
+                        }
+                        .setNegativeButton("No") { dialog, id ->
+                            // Dismiss the dialog
+                            dialog.dismiss()
+                        }
+                    val alert = builder.create()
+                    alert.show()
+
+
+
+                }
+
                 mAlertDialog.dismiss()
                 val currentMonth = currentMonth()
                 getExpenseAndincomeTotal(currentMonth)
@@ -204,6 +200,29 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
 
     }
+    private fun delete_IncomeData(Id: Int) {
+        var dbData = DataBaseHelper(applicationContext)
+        var dataBase = dbData.writableDatabase
+        val whereclause = "_idIncome = ?"
+        val whereargs = arrayOf(Id.toString())
+        dataBase.delete("monthlyIncome",whereclause,whereargs )
+    }
+    private fun check_Income_Present(incomeDate: String): Pair<Boolean,Int> {
+        var month = incomeDate.takeLast(8)
+        var selectedmonth = month.substring(0,3)
+        var selectedyear = incomeDate.takeLast(4)
+        var dbData = DataBaseHelper(applicationContext)
+        var db = dbData.readableDatabase
+        var incomeData = db.rawQuery("select count(income_amount),_idIncome from monthlyIncome where date_added LIKE '%$selectedmonth%' and date_added LIKE '%$selectedyear%'" , null)
+
+        incomeData.moveToFirst()
+        if(incomeData.getInt(0) == 0)
+        {
+            return Pair(true,incomeData.getInt(1))
+        }
+            return Pair(false,incomeData.getInt(1))
+    }
+
     override fun onRestart() {
         super.onRestart()
         expensesDatalist.clear()

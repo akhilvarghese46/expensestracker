@@ -3,6 +3,8 @@ package com.example.expensestracker
 import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.NumberPicker
 import android.widget.TextView
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.expensestracker.Adaptor.MonthlyIncomeAdaptor
@@ -27,6 +30,7 @@ class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListene
     lateinit var txt_selected_Date: TextView
     lateinit var cal: Calendar
     lateinit var passedMonth: String
+    var defaultYear :Int = 0
 
     var monthList: List<String> = arrayListOf(
         "January",
@@ -48,6 +52,11 @@ class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_monthlyincome)
+        val actionBar: ActionBar?
+        actionBar = supportActionBar
+        val colorDrawable = ColorDrawable(Color.parseColor("#FD0000"))
+        actionBar?.setBackgroundDrawable(colorDrawable)
+
         var currentYear = 2021
 
         get_MonthList(currentYear)
@@ -55,7 +64,9 @@ class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListene
         _numberpicker?.setOnValueChangedListener(object : NumberPicker.OnValueChangeListener {
             override fun onValueChange(p0: NumberPicker?, p1: Int, p2: Int) {
                 //_textview?.setText("user has selected: " + p2)
-
+                monthArryList.clear()
+                defaultYear = p2
+                get_MonthList(p2)
 
             }
         })
@@ -85,6 +96,8 @@ class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListene
         expSelectDate.text = addeddate.text.toString()
         expensevalue.text = itemamount.text.toString()
         val mAlertDialog = income_Builder.show()
+
+
 
 
         val btn_cancel: View = income_DialogView.findViewById(R.id.btn_cancel_income)
@@ -120,6 +133,13 @@ class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListene
                     expensevalue.text.toString().toInt(),
                     expSelectDate.text.toString()
                 )
+                monthArryList.clear()
+                get_MonthList(defaultYear)
+                editAlertDialog.dismiss()
+            }
+
+            val btn_cancel_inedit: View = EditDialogView.findViewById(R.id.btn_cancel_income)
+            btn_cancel_inedit.setOnClickListener {
                 editAlertDialog.dismiss()
             }
 
@@ -146,9 +166,28 @@ class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListene
 
         val fabdelete: View = income_DialogView.findViewById(R.id.fab_delete)
         fabdelete.setOnClickListener {
-            val delexpitemid = income_DialogView.findViewById(R.id.item_id) as TextView
-            delete_IncomeData(delexpitemid.text.toString().toInt())
-           
+
+
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to Delete?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+
+                    val delexpitemid = income_DialogView.findViewById(R.id.item_id) as TextView
+                    delete_IncomeData(delexpitemid.text.toString().toInt())
+                    monthArryList.clear()
+                    get_MonthList(defaultYear)
+                    mAlertDialog.dismiss()
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+
+
+
             mAlertDialog.dismiss()
         }
 
@@ -164,7 +203,7 @@ class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListene
     private fun delete_IncomeData(Id: Int) {
         var dbData = DataBaseHelper(applicationContext)
         var dataBase = dbData.writableDatabase
-        val whereclause = "_id = ?"
+        val whereclause = "_idIncome = ?"
         val whereargs = arrayOf(Id.toString())
         dataBase.delete("monthlyIncome",whereclause,whereargs )
     }
@@ -213,8 +252,8 @@ class MonthlyIncomeActivity: AppCompatActivity(), AdapterView.OnItemClickListene
     fun get_MonthList(currentYear: Int) {
         monthListview = findViewById(R.id.expense_monthview)
         _numberpicker = findViewById<NumberPicker>(R.id.expense_yarpicker)
-        _numberpicker?.setMinValue(2010)
-        _numberpicker?.setMaxValue(2021)
+        _numberpicker?.setMinValue(2015)
+        _numberpicker?.setMaxValue(2030)
         _numberpicker?.setValue(currentYear)
 
 

@@ -106,7 +106,24 @@
         android:gravity="start|top"
         android:inputType="textMultiLine" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal">
 
+
+
+        <CheckBox
+            android:id="@+id/isRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="44dp"
+            android:layout_weight="0"
+            android:text="Regular/Irregular Expense" />
+
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

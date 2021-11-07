@@ -3,4 +3,11 @@
     <string name="fab_label_income">Add Income</string>
     <string name="fab_label_expenses">Add Expenses</string>
     <string name="submit">submit</string>
+
+    <string-array name="spinner_strings">
+        <item>All</item>
+        <item>Regular</item>
+        <item>Irregular</item>
+    </string-array>
+
 </resources>

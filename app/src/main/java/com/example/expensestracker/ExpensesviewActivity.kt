@@ -2,19 +2,16 @@ package com.example.expensestracker
 
 import android.app.DatePickerDialog
 import android.content.ContentValues
-import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AdapterView
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.expensestracker.Adaptor.ExpensesAdaptor
 import com.example.expensestracker.Adaptor.ExpensesViewAdaptor
-import com.example.expensestracker.Adaptor.MonthlyAdaptor
 import com.example.expensestracker.Data.ExpensesData
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,6 +26,10 @@ class ExpensesviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expensesview)
+        val actionBar: ActionBar?
+        actionBar = supportActionBar
+        val colorDrawable = ColorDrawable(Color.parseColor("#FD0000"))
+        actionBar?.setBackgroundDrawable(colorDrawable)
         expensesListview = findViewById(R.id.monthlyexpensesList)
         getMonthExpensesList()
         getRregorIrregTotal()
@@ -45,6 +46,7 @@ class ExpensesviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener 
          val itemdiscription = p1?.findViewById(R.id.item_discription) as TextView
          val addeddate = p1?.findViewById(R.id.added_date) as TextView
          val itemamount = p1?.findViewById(R.id.item_amount) as TextView
+        val regularvalue =p1?.findViewById(R.id.isRegular) as CheckBox
 
          // Custom dialog layout
          val expense_DialogView = LayoutInflater.from(this).inflate(R.layout.activity_viewexpenses, null )
@@ -55,12 +57,14 @@ class ExpensesviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener 
          val expenseitem = expense_DialogView.findViewById(R.id.expense_item) as TextView
          val expensevalue = expense_DialogView.findViewById(R.id.expense_value) as TextView
          val expense_discription = expense_DialogView.findViewById(R.id.expense_discription) as TextView
+        val expense_regularvalue = expense_DialogView.findViewById(R.id.isRegular) as CheckBox
 
          expitemid.text=iteamId.text.toString()
          expSelectDate.text=addeddate.text.toString()
          expenseitem.text=itemname.text.toString()
          expensevalue.text=itemamount.text.toString()
          expense_discription.text=itemdiscription.text.toString()
+         expense_regularvalue.isChecked=regularvalue.isChecked()
          val mAlertDialog = expense_Builder.show()
 
          val edit_button: View = expense_DialogView.findViewById(R.id.floatingActionButton3)
@@ -74,12 +78,14 @@ class ExpensesviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener 
              val expenseitem = expense_EditDialogView.findViewById(R.id.expense_item) as TextView
              val expensevalue = expense_EditDialogView.findViewById(R.id.expense_value) as TextView
              val expense_discription = expense_EditDialogView.findViewById(R.id.expense_discription) as TextView
+             val expense_regularvalue = expense_EditDialogView.findViewById(R.id.isRegular) as CheckBox
 
              expitemid.text=iteamId.text.toString()
              expSelectDate.text=addeddate.text.toString()
              expenseitem.text=itemname.text.toString()
              expensevalue.text=itemamount.text.toString()
              expense_discription.text=itemdiscription.text.toString()
+             expense_regularvalue.isChecked=regularvalue.isChecked()
 
              val editAlertDialog = expense_editBuilder.show()
              val edit_submit_button: View = expense_EditDialogView.findViewById(R.id.btn_add_expense)
@@ -89,9 +95,11 @@ class ExpensesviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener 
                  val expenseitem = expense_EditDialogView.findViewById(R.id.expense_item) as TextView
                  val expensevalue = expense_EditDialogView.findViewById(R.id.expense_value) as TextView
                  val expense_discription = expense_EditDialogView.findViewById(R.id.expense_discription) as TextView
+                 val expense_regularvalue = expense_EditDialogView.findViewById(R.id.isRegular) as CheckBox
 
-                 update_Expense_Data(expitemid.text.toString().toInt(),expenseitem.text.toString() ,expensevalue.text.toString().toInt(),expense_discription.text.toString(),expSelectDate.text.toString())
+                 update_Expense_Data(expitemid.text.toString().toInt(),expenseitem.text.toString() ,expensevalue.text.toString().toInt(),expense_discription.text.toString(),expSelectDate.text.toString(),expense_regularvalue.isChecked)
                  getMonthExpensesList()
+                 getRregorIrregTotal()
                 /* val monthActyObj =  monthlyexpensesActivity()
                  var year = expSelectDate.text.takeLast(4)
                  with(monthActyObj) {
@@ -125,9 +133,28 @@ class ExpensesviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener 
 
         val fabdelete: View = expense_DialogView.findViewById(R.id.fab_delete)
         fabdelete.setOnClickListener {
-            val delexpitemid = expense_DialogView.findViewById(R.id.item_id) as TextView
-            delete_ExpensesData(delexpitemid.text.toString().toInt())
-            getMonthExpensesList()
+
+
+
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to Delete?")
+                .setCancelable(false)
+                .setPositiveButton("Yes") { dialog, id ->
+
+                    val delexpitemid = expense_DialogView.findViewById(R.id.item_id) as TextView
+                    delete_ExpensesData(delexpitemid.text.toString().toInt())
+                    getMonthExpensesList()
+                    getRregorIrregTotal()
+                    mAlertDialog.dismiss()
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+
+
             mAlertDialog.dismiss()
         }
 
@@ -176,14 +203,27 @@ class ExpensesviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener 
 
     }
 
-    private fun update_Expense_Data(expitemid: Int, expenseitem: String, expensevalue: Int, expense_discription: String, expSelectDate: String) {
+    private fun update_Expense_Data(
+        expitemid: Int,
+        expenseitem: String,
+        expensevalue: Int,
+        expense_discription: String,
+        expSelectDate: String,
+        checked: Boolean
+    ) {
         var dbData = DataBaseHelper(applicationContext)
         var dataBase = dbData.writableDatabase
         var cv = ContentValues()
+        var regular = 0
+        if(checked == true)
+        {
+            regular = 1
+        }
         cv.put("item_name" , expenseitem)
         cv.put("amount" , expensevalue)
         cv.put("description" , expense_discription)
         cv.put("date_added" , expSelectDate)
+        cv.put("isRegular" , regular)
         val whereclause = "_id = ?"
         val whereargs = arrayOf(expitemid.toString())
         dataBase.update("monthlyExpenses",cv,whereclause,whereargs )

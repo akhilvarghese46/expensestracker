@@ -1,12 +1,12 @@
 package com.example.expensestracker
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ListView
-import android.widget.NumberPicker
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.expensestracker.Adaptor.MonthlyAdaptor
 import com.example.expensestracker.Data.ExpensesData
@@ -15,12 +15,13 @@ import com.example.expensestracker.Data.MonthData
 class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListener {
 
     var _numberpicker: NumberPicker? = null
-    var _regularpicker: NumberPicker? = null
+   // var _regularpicker: NumberPicker? = null
     var monthArryList = arrayListOf<MonthData>()
     var defaultRegular :Int = 0
     var defaultYear :Int = 0
     lateinit var mothlyAdapter: MonthlyAdaptor
     lateinit var monthListview: ListView
+    private var _spinner: Spinner? = null
     var monthList: List<String> = arrayListOf(
         "January",
         "February",
@@ -41,11 +42,43 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_monthlyexpenses)
+        val actionBar: ActionBar?
+        actionBar = supportActionBar
+        val colorDrawable = ColorDrawable(Color.parseColor("#FD0000"))
+        actionBar?.setBackgroundDrawable(colorDrawable)
 
         var currentYear = 2021
         defaultYear =currentYear
-        get_MonthList(currentYear,defaultRegular)
 
+
+        monthListview = findViewById(R.id.expense_monthview)
+        _spinner = findViewById<Spinner>(R.id.regularpicker)
+
+        var adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
+            this,
+            R.array.spinner_strings,
+            android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        _spinner?.setAdapter(adapter)
+        _spinner?.setSelection(defaultRegular)
+
+
+        _spinner?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                //_spinner?.setSelection(1)
+            // p0?.getItemAtPosition(p2)
+                monthArryList.clear()
+                var currentYear  = findViewById<NumberPicker>(R.id.expense_yarpicker).value.toString()
+                defaultRegular = p2
+                get_MonthList(currentYear.toInt(),p2)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        })
+
+
+        get_MonthList(currentYear,defaultRegular)
 
         _numberpicker?.setOnValueChangedListener(object : NumberPicker.OnValueChangeListener {
             override fun onValueChange(p0: NumberPicker?, p1: Int, p2: Int) {
@@ -56,14 +89,7 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
             }
         })
 
-        _regularpicker?.setOnValueChangedListener(object : NumberPicker.OnValueChangeListener {
-            override fun onValueChange(p0: NumberPicker?, p1: Int, p2: Int) {
-                //monthArryList.clear()
-                //defaultRegular=p2
-                //get_MonthList(defaultYear,p2)
 
-            }
-        })
     }
 
     override fun onRestart() {
@@ -81,12 +107,6 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
         _numberpicker?.setMaxValue(2030)
         _numberpicker?.setValue(currentYear)
 
-        _regularpicker = findViewById<NumberPicker>(R.id.regularpicker)
-        val regdatastring = arrayOf("All", "Regular", "Irregular")
-        _regularpicker?.setMinValue(0)
-        _regularpicker?.setMaxValue(regdatastring.size - 1)
-        _regularpicker?.setDisplayedValues(regdatastring)
-        _regularpicker?.setValue(regular)
 
 
         var str = "select * from monthlyExpenses where date_added like '%$currentYear%'"

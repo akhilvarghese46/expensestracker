@@ -56,13 +56,14 @@
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="24sp" />
-
-                <NumberPicker
-                    android:id="@+id/regularpicker"
+                <Spinner
                     android:layout_width="118dp"
                     android:layout_height="match_parent"
+                    android:id="@+id/regularpicker"
                     android:background="@drawable/drawablenp"
-                    android:foregroundTint="#FD3232" />
+                    android:foregroundTint="#FD3232"
+                    />
+
             </LinearLayout>
 
 
