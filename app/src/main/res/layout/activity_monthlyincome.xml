@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_bg_red"
+    android:backgroundTint="#F47373">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/expense_monthview"
+                    android:background="#F47373"
+                    android:gravity="center"
+                    android:text="Select Year: "
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <NumberPicker
+                    android:id="@+id/expense_yarpicker"
+                    android:layout_width="118dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/drawablenp"
+                    android:foregroundTint="#FD3232" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/expense_monthview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            tools:listitem="@layout/list_view">
+
+        </ListView>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -17,6 +17,8 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
     var _numberpicker: NumberPicker? = null
     var _regularpicker: NumberPicker? = null
     var monthArryList = arrayListOf<MonthData>()
+    var defaultRegular :Int = 0
+    var defaultYear :Int = 0
     lateinit var mothlyAdapter: MonthlyAdaptor
     lateinit var monthListview: ListView
     var monthList: List<String> = arrayListOf(
@@ -41,13 +43,24 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
         setContentView(R.layout.activity_monthlyexpenses)
 
         var currentYear = 2021
-        get_MonthList(currentYear)
+        defaultYear =currentYear
+        get_MonthList(currentYear,defaultRegular)
 
 
         _numberpicker?.setOnValueChangedListener(object : NumberPicker.OnValueChangeListener {
             override fun onValueChange(p0: NumberPicker?, p1: Int, p2: Int) {
                 monthArryList.clear()
-                get_MonthList(p2)
+                defaultYear = p2
+                get_MonthList(p2,defaultRegular)
+
+            }
+        })
+
+        _regularpicker?.setOnValueChangedListener(object : NumberPicker.OnValueChangeListener {
+            override fun onValueChange(p0: NumberPicker?, p1: Int, p2: Int) {
+                //monthArryList.clear()
+                //defaultRegular=p2
+                //get_MonthList(defaultYear,p2)
 
             }
         })
@@ -57,12 +70,11 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
         super.onRestart()
         monthArryList.clear()
         var currentYear  = findViewById<NumberPicker>(R.id.expense_yarpicker).value.toString()
-        get_MonthList(currentYear.toInt())
+        get_MonthList(currentYear.toInt(),defaultRegular)
     }
 
-    fun get_MonthList(currentYear: Int) {
+    fun get_MonthList(currentYear: Int ,regular: Int) {
         monthListview = findViewById(R.id.expense_monthview)
-
 
         _numberpicker = findViewById<NumberPicker>(R.id.expense_yarpicker)
         _numberpicker?.setMinValue(2015)
@@ -70,14 +82,26 @@ class monthlyexpensesActivity: AppCompatActivity(), AdapterView.OnItemClickListe
         _numberpicker?.setValue(currentYear)
 
         _regularpicker = findViewById<NumberPicker>(R.id.regularpicker)
-        val regdatastring = arrayOf("All Expenses", "Regular Expenses", "Irregular Expenses")
+        val regdatastring = arrayOf("All", "Regular", "Irregular")
         _regularpicker?.setMinValue(0)
         _regularpicker?.setMaxValue(regdatastring.size - 1)
         _regularpicker?.setDisplayedValues(regdatastring)
-
+        _regularpicker?.setValue(regular)
 
 
         var str = "select * from monthlyExpenses where date_added like '%$currentYear%'"
+
+
+        if(regular==1)
+        {
+            str = "select * from monthlyExpenses where date_added like '%$currentYear%' and isRegular = 1"
+        }
+
+        if(regular==2)
+        {
+            str = "select * from monthlyExpenses where date_added like '%$currentYear%' and isRegular = 0"
+        }
+
         var dbData = DataBaseHelper(applicationContext)
         var db = dbData.readableDatabase
         var expensesDatalist = arrayListOf<ExpensesData>()

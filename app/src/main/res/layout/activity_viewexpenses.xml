@@ -14,6 +14,7 @@
         android:layout_height="58dp"
         android:layout_gravity="center"
         android:background="@drawable/curved_view">
+
         <TextView
             android:layout_width="377dp"
             android:layout_height="53dp"

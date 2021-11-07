@@ -48,7 +48,7 @@ class IncomeviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener {
         val expitemid = income_DialogView.findViewById(R.id.item_id) as TextView
         val expSelectDate = income_DialogView.findViewById(R.id.txt_selected_Date) as TextView
         val expenseitem = income_DialogView.findViewById(R.id.expense_item) as TextView
-        val expensevalue = income_DialogView.findViewById(R.id.expense_value) as TextView
+        val expensevalue = income_DialogView.findViewById(R.id.income_value) as TextView
 
 
         expitemid.text = iteamId.text.toString()
@@ -76,7 +76,7 @@ class IncomeviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener {
             expensevalue.text = itemamount.text.toString()
 
             val editAlertDialog = expense_editBuilder.show()
-            val edit_submit_button: View = EditDialogView.findViewById(R.id.btn_add_Income)
+            val edit_submit_button: View = EditDialogView.findViewById(R.id.btn_add_income)
             edit_submit_button.setOnClickListener {
                 val expitemid = EditDialogView.findViewById(R.id.item_id) as TextView
                 val expSelectDate =
@@ -113,14 +113,17 @@ class IncomeviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener {
 
 
     private fun getMonthIncomeList() {
+        var selecedYear = intent.getStringExtra("selecedYear")
         var selectedMonth = intent.getStringExtra("selectedMonth")
         var dbData = DataBaseHelper(applicationContext)
         var db = dbData.readableDatabase
         var incomeDatalist = arrayListOf<IncomeData>()
-        var incomeData = db.rawQuery("select * from monthlyIncome" , null)
+        var str = "select * from monthlyIncome where date_added like '%$selecedYear%' and date_added like '%$selectedMonth%'"
+
+        var incomeData = db.rawQuery(str, null)
         incomeData.moveToFirst()
         for(i in 0 until incomeData.count) {
-            if (incomeData.getString(4).contains(selectedMonth.toString())) {
+            if (incomeData.getString(2).contains(selectedMonth.toString())) {
                 var obj: IncomeData = IncomeData(
                     incomeData.getInt(0),
                     incomeData.getInt(1),
@@ -132,7 +135,7 @@ class IncomeviewActivity:AppCompatActivity(), AdapterView.OnItemClickListener {
         }
 
 
-        IncomeListview = findViewById(R.id.monthlyexpensesList)
+        IncomeListview = findViewById(R.id.monthlyincomeList)
        // expensesListview.isClickable = true
         incomeviewAdaptor = IncomeviewAdaptor(this, incomeDatalist)
         IncomeListview.adapter = incomeviewAdaptor

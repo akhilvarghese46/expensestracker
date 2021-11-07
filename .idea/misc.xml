@@ -16,6 +16,8 @@
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/drawable/layout_bg.xml" value="0.26666666666666666" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/drawable/layout_bg_red.xml" value="0.2703125" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/drawable/round_corners.xml" value="0.26666666666666666" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/drawable/spinner_bg.xml" value="0.14479166666666668" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/drawable/spinner_sla.xml" value="0.14479166666666668" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_Income.xml" value="0.25052083333333336" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_editexpenses.xml" value="0.25416666666666665" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_editincome.xml" value="0.25052083333333336" />
@@ -26,6 +28,8 @@
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_main_old.xml" value="0.25416666666666665" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_monthlyIncome.xml" value="0.25052083333333336" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_monthlyexpenses.xml" value="0.2" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_monthlyexpenses0.xml" value="0.25416666666666665" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_monthlyincome.xml" value="0.264" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_viewexpenses.xml" value="0.4" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/activity_viewincome.xml" value="0.2625" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/add_expenses.xml" value="0.1976284584980237" />
@@ -33,6 +37,7 @@
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/list_view.xml" value="0.25052083333333336" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/list_view_month.xml" value="0.12864583333333332" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/row_expenses.xml" value="0.25052083333333336" />
+        <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/layout/spinner.xml" value="0.12864583333333332" />
         <entry key="..\:/Sem 1 Griffith College sep/Mobile development/Assignment 1/md_ExpensesTracker/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2703125" />
       </map>
     </option>
