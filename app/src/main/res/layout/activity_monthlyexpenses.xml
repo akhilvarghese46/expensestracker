@@ -21,9 +21,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="62dp"
                     android:layout_alignBottom="@+id/expense_monthview"
                     android:background="#F47373"
                     android:gravity="center"
@@ -35,7 +36,7 @@
                 <NumberPicker
                     android:id="@+id/expense_yarpicker"
                     android:layout_width="118dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="80dp"
                     android:background="@drawable/drawablenp"
                     android:foregroundTint="#FD3232" />
             </LinearLayout>
@@ -58,7 +59,7 @@
                     android:textSize="24sp" />
                 <Spinner
                     android:layout_width="118dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="80dp"
                     android:id="@+id/regularpicker"
                     android:background="@drawable/drawablenp"
                     android:foregroundTint="#FD3232"
